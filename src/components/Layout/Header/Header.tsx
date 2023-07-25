@@ -9,7 +9,7 @@ const Header = () => {
             <img src="../../../../public/assets/logo.png" height={40} width={40} alt="Logo" style={{marginRight: '10px'}} />
             Reactivities
           </div>
-          <div className="main-index">
+          <div className="main-index ml-5">
             <button className="bg-green-600 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
               Create Activity
             </button>
