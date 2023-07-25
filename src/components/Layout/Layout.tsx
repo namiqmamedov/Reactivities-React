@@ -6,10 +6,10 @@ import axios from "axios"
 import { Activity } from "../../models/activity"
  
 
-
 const Layout = () => {
   const [activities, setActivities] = useState<Activity[]>([])
   const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
+  const [editMode, setEditMode] = useState(false)
 
 
   useEffect(() => {
@@ -26,10 +26,19 @@ const Layout = () => {
     setSelectedActivity(undefined)
   }
 
+  function handleFormOpen(id?: string) {
+    id ? handleSelectedActivity(id) : handleCancelSelectActivity();
+    setEditMode(true);
+  }
+
+  function handleFormClose() {
+    setEditMode(false);
+  }
+
   
   return (
   <Fragment>
-     <Header/>
+     <Header openForm={handleFormOpen} />
    {/* <>
     <Routers/>
    </> */}
@@ -37,7 +46,11 @@ const Layout = () => {
     activities={activities} 
     selectedActivity={selectedActivity}
     selectActivity={handleSelectedActivity} 
-    cancelSelectActivity={handleCancelSelectActivity} />
+    cancelSelectActivity={handleCancelSelectActivity}
+    editMode={editMode}
+    openForm={handleFormOpen}
+    closeForm={handleFormClose}
+    />
   </Fragment>
 
   )

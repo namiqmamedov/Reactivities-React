@@ -1,6 +1,10 @@
 import { Container } from "@mui/material"
 
-const Header = () => {
+interface Props {
+  openForm: () => void;
+}
+
+const Header = ({openForm} : Props) => {
   return (
     <div className="header-index py-1">
       <Container>
@@ -10,7 +14,7 @@ const Header = () => {
             Reactivities
           </div>
           <div className="main-index ml-5">
-            <button className="bg-green-600 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+            <button onClick={openForm} className="bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-4 rounded">
               Create Activity
             </button>
           </div>

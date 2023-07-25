@@ -10,10 +10,11 @@ import { Activity } from '../../models/activity';
 interface Props {
     activity: Activity;
     cancelSelectActivity: () => void;
+    openForm: (id: string) => void;
 
 }
 
-export default function ActivityDetails({activity,cancelSelectActivity} : Props) {
+export default function ActivityDetails({activity,cancelSelectActivity,openForm} : Props) {
   return (
     <Card>
       <CardMedia
@@ -33,7 +34,7 @@ export default function ActivityDetails({activity,cancelSelectActivity} : Props)
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Edit</Button>
+        <Button onClick={() => openForm(activity.id)} size="small">Edit</Button>
         <Button onClick={cancelSelectActivity} size="small">Cancel</Button>
       </CardActions>
     </Card>

@@ -18,8 +18,10 @@ const ActivityList = ({activities, selectActivity} : Props) => {
                     <div className="bottom flex">
                     <h2>{activity.city},</h2> <h2>{activity.venue}</h2>
                     </div>
+                    <div className="bottom-item flex justify-between pt-3">
                     <label>{activity.category}</label>
                     <Button onClick={() => selectActivity(activity.id)} variant='contained'>View</Button>
+                    </div>
                 </div>
             ))}
         </div>
