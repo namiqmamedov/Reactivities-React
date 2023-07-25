@@ -8,12 +8,14 @@ import { Activity } from '../../models/activity';
 
 
 interface Props {
-    activity: Activity
+    activity: Activity;
+    cancelSelectActivity: () => void;
+
 }
 
-export default function ActivityDetails({activity} : Props) {
+export default function ActivityDetails({activity,cancelSelectActivity} : Props) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card>
       <CardMedia
         sx={{ height: 140 }}
         image={`/assets/categoryImages/${activity.category}.jpg`}
@@ -32,7 +34,7 @@ export default function ActivityDetails({activity} : Props) {
       </CardContent>
       <CardActions>
         <Button size="small">Edit</Button>
-        <Button size="small">Cancel</Button>
+        <Button onClick={cancelSelectActivity} size="small">Cancel</Button>
       </CardActions>
     </Card>
   );
