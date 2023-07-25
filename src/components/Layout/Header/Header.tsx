@@ -2,7 +2,7 @@ import { Container } from "@mui/material"
 
 const Header = () => {
   return (
-    <div className="header-index ">
+    <div className="header-index py-1">
       <Container>
         <div className="header-wrapper flex items-center">
           <div className="item-index text-white flex items-center">
@@ -10,7 +10,7 @@ const Header = () => {
             Reactivities
           </div>
           <div className="main-index">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button className="bg-green-600 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
               Create Activity
             </button>
           </div>
