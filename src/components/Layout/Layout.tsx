@@ -4,7 +4,8 @@ import { Fragment, useEffect, useState } from "react"
 import ActivityDashboard from "../UI/ActivityDashboard"
 import axios from "axios"
 import { Activity } from "../../models/activity"
- 
+ import {v4 as uuid} from 'uuid';
+import agent from "../../api/agent"
 
 const Layout = () => {
   const [activities, setActivities] = useState<Activity[]>([])
@@ -13,8 +14,8 @@ const Layout = () => {
 
 
   useEffect(() => {
-    axios.get<Activity[]>('http://localhost:5000/api/activities').then(response => {
-      setActivities(response.data)
+    agent.Activities.list().then(response => {
+      setActivities(response)
     })
   }, [])
 
@@ -35,6 +36,20 @@ const Layout = () => {
     setEditMode(false);
   }
 
+  function handleCreateOrEditActivity(activity: Activity) {
+    activity.id 
+    ? setActivities([...activities.filter(x=>x.id !== activity.id), activity]) // remove the activity we're updating  and then replace it with the activity
+    : setActivities([...activities, {...activity, id: uuid()}])
+
+    setEditMode(false);
+    setSelectedActivity(activity)
+  }
+
+
+  function handleDeleteActivity(id: string) {
+    setActivities([...activities.filter(x=>x.id !== id)])
+  }
+
   
   return (
   <Fragment>
@@ -50,6 +65,8 @@ const Layout = () => {
     editMode={editMode}
     openForm={handleFormOpen}
     closeForm={handleFormClose}
+    createOrEdit={handleCreateOrEditActivity}
+    deleteActivity={handleDeleteActivity}
     />
   </Fragment>
 

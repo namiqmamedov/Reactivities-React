@@ -4,9 +4,10 @@ import { Activity } from '../../models/activity'
 interface Props {
     activities: Activity[];
     selectActivity: (id: string) => void;
+    deleteActivity: (id: string) => void;
 }
 
-const ActivityList = ({activities, selectActivity} : Props) => {
+const ActivityList = ({activities, selectActivity, deleteActivity} : Props) => {
   return (
     <div className="item-list">
         <div className="item-group">
@@ -20,7 +21,10 @@ const ActivityList = ({activities, selectActivity} : Props) => {
                     </div>
                     <div className="bottom-item flex justify-between pt-3">
                     <label>{activity.category}</label>
-                    <Button onClick={() => selectActivity(activity.id)} variant='contained'>View</Button>
+                        <div className="button-center flex gap-2">
+                            <Button onClick={() => deleteActivity(activity.id)} variant='contained' color='error'>Delete</Button>
+                            <Button onClick={() => selectActivity(activity.id)} variant='contained'>View</Button>
+                        </div>
                     </div>
                 </div>
             ))}
