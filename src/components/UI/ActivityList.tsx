@@ -1,16 +1,14 @@
 import { Button } from '@mui/material';
-import { Activity } from '../../models/activity'
 import { LoadingButton } from '@mui/lab';
 import { SyntheticEvent, useState } from 'react';
 import { useStore } from '../../stores/store';
+import { observer } from 'mobx-react-lite';
 
-interface Props {
-    activities: Activity[];
-    deleteActivity: (id: string) => void;
-    submitting: boolean;
-}
 
-const ActivityList = ({activities, deleteActivity,submitting} : Props) => {
+export default observer(function ActivityList() {
+    const {activityStore} = useStore();
+    const {deleteActivity, activities, loading} = activityStore;
+
     const [target, setTarget] = useState('');
 
     function handleActivityDelete(e: SyntheticEvent<HTMLButtonElement>, id:string) {
@@ -18,7 +16,6 @@ const ActivityList = ({activities, deleteActivity,submitting} : Props) => {
         deleteActivity(id);
     }
 
-    const {activityStore} = useStore();
 
   return (
     <div className="item-list">
@@ -34,7 +31,7 @@ const ActivityList = ({activities, deleteActivity,submitting} : Props) => {
                     <div className="bottom-item flex justify-between pt-3">
                     <label>{activity.category}</label>
                         <div className="button-center flex gap-2">
-                            <LoadingButton name={activity.id} loading={submitting && target === activity.id} 
+                            <LoadingButton name={activity.id} loading={loading && target === activity.id} 
                             onClick={(e) => handleActivityDelete(e, activity.id)} variant='contained' color='error'>Delete</LoadingButton>
                             <Button onClick={() => activityStore.selectActivity(activity.id)} variant='contained'>View</Button>
                         </div>
@@ -45,6 +42,4 @@ const ActivityList = ({activities, deleteActivity,submitting} : Props) => {
     </div>
     
   )
-}
-
-export default ActivityList
+})
