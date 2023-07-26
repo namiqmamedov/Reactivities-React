@@ -1,26 +1,34 @@
 import {  Button, Container, TextField } from "@mui/material"
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import { useStore } from "../../../stores/store";
 import { observer } from "mobx-react-lite";
+import { useParams } from "react-router-dom";
+import { Activity } from "../../../models/activity";
+import Loading from "../../../common/Loading";
 
 
 export default observer(function ActivityForm() {
 
   const {activityStore} = useStore();
-  const {selectedActivity, createActivity, updateActivity, loading} = activityStore;
+  const {selectedActivity, createActivity, updateActivity, 
+    loading, loadActivity,loadingInitial} = activityStore;
 
-  const initialState = selectedActivity ?? {
-     id: '',
-     title: '',
-     category: '',
-     description: '',
-     date: '',
-     city: '',
-     venue: '' 
-  }
- 
-  const [activity, setActivity] = useState(initialState)
+    const {id} = useParams();
+
+    const [activity,setActivity] = useState<Activity>({
+        id: '',
+        title: '',
+        category: '',
+        description: '',
+        date: '',
+        city: '',
+        venue: '' 
+    });
+
+    useEffect(() => {
+      if(id) loadActivity(id).then(activity => setActivity(activity!))
+    }, [id, loadActivity]);
 
   function handleSubmit(e:React.FormEvent<EventTarget>) {
     e.preventDefault()
@@ -31,6 +39,8 @@ export default observer(function ActivityForm() {
       const {name,value} = event.target;
       setActivity({...activity, [name]: value})
   }
+
+  if(loadingInitial) return <Loading/>
   
   return (
     <Container>

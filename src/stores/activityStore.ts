@@ -5,11 +5,11 @@ import {v4 as uuid} from 'uuid';
 
 
 export default class ActivityStore {
-    activityRegistry = new Map<string, Activity>();
+    activityRegistry = new Map<string, Activity>(); // we're using map cause we using map method clear,delete,get,has,set ...
     selectedActivity?: Activity = undefined;
     editMode = false;
     loading = false;
-    loadingInitial = true; 
+    loadingInitial = false; 
 
     constructor() {
         // makeObservable(this, {
@@ -25,6 +25,7 @@ export default class ActivityStore {
     }
 
     loadActivities = async () => {
+        this.setLoadingInitial(true);
         try {
             const activities = await agent.Activities.list();
                 activities.forEach(activity => {
@@ -39,13 +40,18 @@ export default class ActivityStore {
 
     loadActivity = async (id: string) => {
         let activity = this.getActivity(id);
-        if(activity) this.selectedActivity = activity;
+        if(activity) {
+            this.selectedActivity = activity;
+            return activity;
+        }
         else{
             this.setLoadingInitial(true);
             try {
                 activity = await agent.Activities.details(id);
                 this.setActivity(activity);
+                runInAction(() => this.selectedActivity = activity);
                 this.setLoadingInitial(false);
+                return activity;
             } catch (error) {
                 console.log(error);
                 this.setLoadingInitial(false);

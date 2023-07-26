@@ -6,19 +6,29 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useStore } from '../../stores/store';
 import Loading from '../../common/Loading';
+import { Link, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import { Container } from '@mui/material';
 
 
-export default function ActivityDetails() {
+export default observer(function ActivityDetails() {
 
   const {activityStore} = useStore();
-  const {selectedActivity: activity} = activityStore;
+  const {selectedActivity: activity, loadActivity,loadingInitial} = activityStore;
+  const {id} = useParams();
 
-  if(!activity) return <Loading/> ;
+  useEffect(() => {
+    if (id) loadActivity(id);
+  }, [id, loadActivity])
+
+  if(loadingInitial || !activity) return <Loading/> ;
 
   return (
-    <Card>
+    <Container>
+    <Card className='mt-8'>
       <CardMedia
-        sx={{ height: 140 }}
+        sx={{ height: 440 }}
         image={`/assets/categoryImages/${activity.category}.jpg`}
         title="green iguana"
       />
@@ -34,9 +44,10 @@ export default function ActivityDetails() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button  size="small">Edit</Button>
-        <Button  size="small">Cancel</Button>
+        <Button component={Link} to={`/manage/${activity.id}`} size="small">Edit</Button>
+        <Button component={Link} to='/activities' size="small">Cancel</Button>
       </CardActions>
     </Card>
+    </Container>
   );
-}
+})

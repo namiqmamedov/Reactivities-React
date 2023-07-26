@@ -1,16 +1,13 @@
 import { Container, Grid } from '@mui/material'
 import ActivityList from './ActivityList';
-import ActivityDetails from './ActivityDetails';
 import { useStore } from '../../stores/store';
 import { observer } from 'mobx-react-lite';
-import ActivityForm from './ActivityForm/ActivityForm';
 import { useEffect } from 'react';
 import Loading from '../../common/Loading';
 
 
 export default observer(function ActivityDashboard() {
     const {activityStore} = useStore();
-    const {selectedActivity,editMode} = activityStore
 
     useEffect(() => {
       activityStore.loadActivities();
@@ -26,11 +23,7 @@ export default observer(function ActivityDashboard() {
             <ActivityList/>
             </Grid>
             <Grid item xs={6}>
-            {selectedActivity && !editMode &&
-             <ActivityDetails />}
-            {editMode && 
-                <ActivityForm />
-            }
+            <h2>Activity filters</h2>
             </Grid>
         </Grid>
        </Container>

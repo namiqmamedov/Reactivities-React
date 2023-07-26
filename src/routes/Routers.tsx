@@ -12,7 +12,8 @@ const Routers = () => {
         <Route path='/home' element={<Home/>} />
         <Route path='/activities' element={<ActivityDashboard/>} />
         <Route path='/activities/:id' element={<ActivityDetails/>} />
-        <Route path='/create-activity' element={<ActivityForm/>} />
+        <Route path='/create-activity' element={<ActivityForm key='create'/>} />
+        <Route path='/manage/:id' element={<ActivityForm key='manage'/> }/>
     </Routes>
   )
 }
