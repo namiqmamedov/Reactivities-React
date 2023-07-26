@@ -1,5 +1,6 @@
 import { Container } from "@mui/material"
 import { useStore } from "../../../stores/store";
+import { Link } from "react-router-dom";
 
 const Header = () => {
 
@@ -13,10 +14,15 @@ const Header = () => {
             <img src="../../../../public/assets/logo.png" height={40} width={40} alt="Logo" style={{marginRight: '10px'}} />
             Reactivities
           </div>
-          <div className="main-index ml-5">
+          <div className="main-index ml-10">
+            <Link to='/activities' className="text-white font-bold mr-4">
+              Activities
+            </Link>
+            <Link to='/create-activity'>
             <button onClick={() => activityStore.openForm()} className="bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-4 rounded">
               Create Activity
             </button>
+            </Link>
           </div>
         </div>
       </Container>

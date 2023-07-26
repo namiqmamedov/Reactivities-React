@@ -3,7 +3,7 @@ import { LoadingButton } from '@mui/lab';
 import { SyntheticEvent, useState } from 'react';
 import { useStore } from '../../stores/store';
 import { observer } from 'mobx-react-lite';
-
+import { Link } from 'react-router-dom';
 
 export default observer(function ActivityList() {
     const {activityStore} = useStore();
@@ -33,7 +33,7 @@ export default observer(function ActivityList() {
                         <div className="button-center flex gap-2">
                             <LoadingButton name={activity.id} loading={loading && target === activity.id} 
                             onClick={(e) => handleActivityDelete(e, activity.id)} variant='contained' color='error'>Delete</LoadingButton>
-                            <Button onClick={() => activityStore.selectActivity(activity.id)} variant='contained'>View</Button>
+                            <Button component={Link} to={`/activities/${activity.id}`} onClick={() => activityStore.selectActivity(activity.id)} variant='contained'>View</Button>
                         </div>
                     </div>
                 </div>

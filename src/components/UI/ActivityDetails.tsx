@@ -11,7 +11,7 @@ import Loading from '../../common/Loading';
 export default function ActivityDetails() {
 
   const {activityStore} = useStore();
-  const {selectedActivity: activity,openForm,cancelSelectedActivity} = activityStore;
+  const {selectedActivity: activity} = activityStore;
 
   if(!activity) return <Loading/> ;
 
@@ -34,8 +34,8 @@ export default function ActivityDetails() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button onClick={() => openForm(activity.id)} size="small">Edit</Button>
-        <Button onClick={cancelSelectedActivity} size="small">Cancel</Button>
+        <Button  size="small">Edit</Button>
+        <Button  size="small">Cancel</Button>
       </CardActions>
     </Card>
   );

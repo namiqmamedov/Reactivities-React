@@ -1,28 +1,16 @@
 import Header from "./Header/Header"
 import Routers from "../../routes/Routers"
-import { Fragment, useEffect, useState } from "react"
-import ActivityDashboard from "../UI/ActivityDashboard"
-import Loading from "../../common/Loading"
-import { useStore } from "../../stores/store"
+import { Fragment } from "react"
 import { observer } from "mobx-react-lite"
 
 const Layout = () => {
-  const {activityStore} = useStore();
-
-
-  useEffect(() => {
-    activityStore.loadActivities();
-  }, [activityStore])
-
-  if (activityStore.loadingInitial) return <Loading/>
 
   return (
   <Fragment>
      <Header />
-   {/* <>
+   <Fragment>
     <Routers/>
-   </> */}
-   <ActivityDashboard />
+   </Fragment>
   </Fragment>
 
   )
