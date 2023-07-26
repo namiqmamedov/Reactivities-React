@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 export default observer(function ActivityList() {
     const {activityStore} = useStore();
-    const {deleteActivity, activities, loading} = activityStore;
+    const {deleteActivity, activitiesByDate, loading} = activityStore;
 
     const [target, setTarget] = useState('');
 
@@ -20,7 +20,7 @@ export default observer(function ActivityList() {
   return (
     <div className="item-list">
         <div className="item-group">
-            {activities.map(activity => (
+            {activitiesByDate.map(activity => (
                 <div key={activity.id} className="item-wrapper mb-5 py-4 px-4 bg-white" >
                     <h2>{activity.title}</h2>
                     <h2>{activity.city}</h2>
