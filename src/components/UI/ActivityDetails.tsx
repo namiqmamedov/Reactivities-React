@@ -4,17 +4,17 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Activity } from '../../models/activity';
+import { useStore } from '../../stores/store';
+import Loading from '../../common/Loading';
 
 
-interface Props {
-    activity: Activity;
-    cancelSelectActivity: () => void;
-    openForm: (id: string) => void;
+export default function ActivityDetails() {
 
-}
+  const {activityStore} = useStore();
+  const {selectedActivity: activity,openForm,cancelSelectedActivity} = activityStore;
 
-export default function ActivityDetails({activity,cancelSelectActivity,openForm} : Props) {
+  if(!activity) return <Loading/> ;
+
   return (
     <Card>
       <CardMedia
@@ -35,7 +35,7 @@ export default function ActivityDetails({activity,cancelSelectActivity,openForm}
       </CardContent>
       <CardActions>
         <Button onClick={() => openForm(activity.id)} size="small">Edit</Button>
-        <Button onClick={cancelSelectActivity} size="small">Cancel</Button>
+        <Button onClick={cancelSelectedActivity} size="small">Cancel</Button>
       </CardActions>
     </Card>
   );

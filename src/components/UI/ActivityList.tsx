@@ -2,15 +2,15 @@ import { Button } from '@mui/material';
 import { Activity } from '../../models/activity'
 import { LoadingButton } from '@mui/lab';
 import { SyntheticEvent, useState } from 'react';
+import { useStore } from '../../stores/store';
 
 interface Props {
     activities: Activity[];
-    selectActivity: (id: string) => void;
     deleteActivity: (id: string) => void;
     submitting: boolean;
 }
 
-const ActivityList = ({activities, selectActivity, deleteActivity,submitting} : Props) => {
+const ActivityList = ({activities, deleteActivity,submitting} : Props) => {
     const [target, setTarget] = useState('');
 
     function handleActivityDelete(e: SyntheticEvent<HTMLButtonElement>, id:string) {
@@ -18,11 +18,13 @@ const ActivityList = ({activities, selectActivity, deleteActivity,submitting} : 
         deleteActivity(id);
     }
 
+    const {activityStore} = useStore();
+
   return (
     <div className="item-list">
         <div className="item-group">
             {activities.map(activity => (
-                <div className="item-wrapper mb-5 py-4 px-4 bg-white" >
+                <div key={activity.id} className="item-wrapper mb-5 py-4 px-4 bg-white" >
                     <h2>{activity.title}</h2>
                     <h2>{activity.city}</h2>
                     <h2>{activity.description}</h2>
@@ -32,8 +34,9 @@ const ActivityList = ({activities, selectActivity, deleteActivity,submitting} : 
                     <div className="bottom-item flex justify-between pt-3">
                     <label>{activity.category}</label>
                         <div className="button-center flex gap-2">
-                            <LoadingButton name={activity.id} loading={submitting && target === activity.id} onClick={(e) => handleActivityDelete(e, activity.id)} variant='contained' color='error'>Delete</LoadingButton>
-                            <Button onClick={() => selectActivity(activity.id)} variant='contained'>View</Button>
+                            <LoadingButton name={activity.id} loading={submitting && target === activity.id} 
+                            onClick={(e) => handleActivityDelete(e, activity.id)} variant='contained' color='error'>Delete</LoadingButton>
+                            <Button onClick={() => activityStore.selectActivity(activity.id)} variant='contained'>View</Button>
                         </div>
                     </div>
                 </div>

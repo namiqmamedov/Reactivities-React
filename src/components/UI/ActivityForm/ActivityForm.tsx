@@ -1,17 +1,15 @@
 import {  Button, TextField } from "@mui/material"
 import { Activity } from "../../../models/activity"
 import { ChangeEvent, useState } from "react";
-import Loading from "../../../common/Loading";
 import { LoadingButton } from "@mui/lab";
+import { useStore } from "../../../stores/store";
+import { observer } from "mobx-react-lite";
 
-interface Props {
-  activity: Activity | undefined;
-  closeForm: () => void;
-  createOrEdit: (activity: Activity) => void;
-  submitting: boolean;
-}
 
-export const ActivityForm = ({activity: selectedActivity,closeForm, createOrEdit,submitting}: Props) => {
+export default observer(function ActivityForm() {
+
+  const {activityStore} = useStore();
+  const {selectedActivity, closeForm, createActivity, updateActivity, loading} = activityStore;
 
   const initialState = selectedActivity ?? {
      id: '',
@@ -27,7 +25,7 @@ export const ActivityForm = ({activity: selectedActivity,closeForm, createOrEdit
 
   function handleSubmit(e:React.FormEvent<EventTarget>) {
     e.preventDefault()
-   createOrEdit(activity);
+   activity.id ? updateActivity(activity) : createActivity(activity);
   }
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -46,10 +44,10 @@ export const ActivityForm = ({activity: selectedActivity,closeForm, createOrEdit
         <div className="form-button flex justify-end gap-3">
           <Button onClick={closeForm} variant="outlined" className="!bg-gray-500 !text-white !border-none" size="small">Cancel</Button>
           {/* <Button type="submit" variant="contained" className="!bg-green-600" size="small">Submit</Button> */}
-         <LoadingButton loading={submitting} type="submit" variant="contained" className="!bg-green-600" size="small">
+         <LoadingButton loading={loading} type="submit" variant="contained" className="!bg-green-600" size="small">
          Submit
          </LoadingButton>
         </div>
     </form>
   )
-}
+})
