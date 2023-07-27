@@ -4,12 +4,14 @@ import { Fragment } from "react"
 import { observer } from "mobx-react-lite"
 import { useLocation } from "react-router-dom"
 import Home from "../../pages/Home"
+import { ToastContainer } from "react-toastify"
 
 const Layout = () => {
   const location = useLocation();
 
   return (
   <Fragment>
+    <ToastContainer position="bottom-right" hideProgressBar theme="colored" />
      {location.pathname === '/' ? <Home/> : (
         <>
         <Header/>

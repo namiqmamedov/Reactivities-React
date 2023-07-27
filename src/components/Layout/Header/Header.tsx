@@ -12,6 +12,9 @@ const Header = () => {
             Reactivities
           </Link>
           <div className="main-index ml-10">
+          <Link to='/errors' className="text-white font-bold mr-4">
+              Errors
+            </Link>
             <Link to='/activities' className="text-white font-bold mr-4">
               Activities
             </Link>
