@@ -1,15 +1,13 @@
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import { useStore } from '../../stores/store';
 import Loading from '../../common/Loading';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
+import ActivityDetailedHeader from './ActivityDetailedHeader';
+import ActivityDetailedChat from './ActivityDetailedChat';
+import ActivityDetailedInfo from './ActivityDetailedInfo';
+import ActivityDetailedSidebar from './ActivityDetailedSidebar';
 
 
 export default observer(function ActivityDetails() {
@@ -25,29 +23,18 @@ export default observer(function ActivityDetails() {
   if(loadingInitial || !activity) return <Loading/> ;
 
   return (
-    <Container>
-    <Card className='mt-8'>
-      <CardMedia
-        sx={{ height: 440 }}
-        image={`/assets/categoryImages/${activity.category}.jpg`}
-        title="green iguana"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {activity.title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-         {activity.description}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-         {activity.date}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button component={Link} to={`/manage/${activity.id}`} size="small">Edit</Button>
-        <Button component={Link} to='/activities' size="small">Cancel</Button>
-      </CardActions>
-    </Card>
-    </Container>
+      <Container className='mt-5'>
+            <Grid container spacing={2}>
+            <Grid item xs={6}>
+                <ActivityDetailedHeader activity={activity} />
+                <ActivityDetailedInfo activity={activity} />
+                <ActivityDetailedChat />
+            </Grid>
+            <Grid item xs={6}>
+              <ActivityDetailedSidebar/>
+            </Grid>
+          </Grid>
+      </Container>
   );
 })
+
