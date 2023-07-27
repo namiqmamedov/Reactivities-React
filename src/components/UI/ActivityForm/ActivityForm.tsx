@@ -1,15 +1,17 @@
-import {  Button, Container, TextField } from "@mui/material"
-import { ChangeEvent, useEffect, useState } from "react";
+import {  Button, Container } from "@mui/material"
+import { useEffect, useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import { useStore } from "../../../stores/store";
 import { observer } from "mobx-react-lite";
-import { useNavigate, useParams } from "react-router-dom";
-import { Activity } from "../../../models/activity";
+import { useParams } from "react-router-dom";
 import Loading from "../../../common/Loading";
-import {v4 as uuid} from 'uuid'
 import { Link } from "react-router-dom";
-import { Field, Formik } from "formik";
-
+import {  Formik } from "formik";
+import * as Yup from 'yup'
+import MyTextInput from "../../../common/form/MyTextInput";
+import MyTextArea from "../../../common/form/MyTextArea";
+import MySelectInput from "../../../common/form/MySelectInput";
+import { categoryOptions } from "../../../common/options/categoryOptions";
 
 
 export default observer(function ActivityForm() {
@@ -30,6 +32,15 @@ export default observer(function ActivityForm() {
         city: '',
         venue: '' 
     });
+
+    const validationSchema = Yup.object({
+      title: Yup.string().required('The activity title is required'),
+      description: Yup.string().required('The activity title is required'),
+      category: Yup.string().required(),
+      date: Yup.string().required(),
+      venue: Yup.string().required(),
+      city: Yup.string().required(),
+    })
 
     useEffect(() => {
       if(id) loadActivity(id).then(activity => setActivity(activity!))
@@ -55,17 +66,17 @@ export default observer(function ActivityForm() {
   
   return (
     <Container>
-      <Formik initialValues={activity} onSubmit={values => console.log(values)} enableReinitialize >
+      <Formik validationSchema={validationSchema} initialValues={activity} onSubmit={values => console.log(values)} enableReinitialize >
         {({handleSubmit}) => (
        <form onSubmit={handleSubmit} autoComplete="off" className="bg-white py-4 px-4 mt-10 ui form">
-              <Field label="Title" variant="outlined"  name='title'  className="!mb-5" />
-              <Field label="Description" rows={2} multiline variant='outlined' name='description' className="!mb-5" />
-              <Field label="Category" variant="outlined" name='category'  className="!mb-5" />
-              <Field label="Date" variant="outlined" valueype="date" name='date'  className="!mb-5" />
-              <Field label="City" variant="outlined" valueame='city' className="!mb-5" />
-              <Field label="Venue" variant="outlined"  name='venue'  className="!mb-5" />
+              <MyTextInput placeholder="Title" name="title"  />
+              <MyTextArea rows={3} placeholder="Description" name='description' />
+              <MySelectInput options={categoryOptions} placeholder="Category" name='category'  />
+              <MyTextInput placeholder="Date"  name='date'  />
+              <MyTextInput placeholder="City" name='city' />
+              <MyTextInput placeholder="Venue"  name='venue'  />
               <div className="form-button flex justify-end gap-3">
-              <Button component={Link} to='/activities'  variant="outlined" className="!bg-gray-500 !text-white !border-none" size="small">Cancel</Button>
+              <Button component={Link} to='/activities'  className="!bg-gray-500 !text-white !border-none" size="small">Cancel</Button>
               <LoadingButton loading={loading} type="submit" variant="contained" className="!bg-green-600" size="small">
               Submit
               </LoadingButton>
