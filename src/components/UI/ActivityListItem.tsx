@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { Activity } from "../../models/activity"
 import {BsFillBalloonFill} from 'react-icons/bs'
 import {BiSolidTimeFive} from 'react-icons/bi'
+import { format } from "date-fns"
 
 interface Props { 
     activity: Activity
@@ -25,7 +26,7 @@ const ActivityListItem = ({activity} : Props) => {
             <div className="center flex gap-2 border border-slate-200 border-y-1 p-2">
             <h2 className="flex items-center mb-0 text-[16px]">
                 <BiSolidTimeFive/>
-                {activity.date}
+                {format(activity.date!, 'dd MMM yyyy h:mm aa')}
             </h2>
             <h2 className="flex items-center mt-0 text-[16px]">
                 <BsFillBalloonFill/>
