@@ -12,6 +12,8 @@ import MyTextInput from "../../../common/form/MyTextInput";
 import MyTextArea from "../../../common/form/MyTextArea";
 import MySelectInput from "../../../common/form/MySelectInput";
 import { categoryOptions } from "../../../common/options/categoryOptions";
+import MyDateInput from "../../../common/form/MyDateInput";
+import { Activity } from "../../../models/activity";
 
 
 export default observer(function ActivityForm() {
@@ -23,12 +25,12 @@ export default observer(function ActivityForm() {
     const {id} = useParams();
     // const navigate = useNavigate()
 
-    const [activity,setActivity] = useState({
+    const [activity,setActivity] = useState<Activity>({
         id: '',
         title: '',
         category: '',
         description: '',
-        date: '',
+        date: null,
         city: '',
         venue: '' 
     });
@@ -72,11 +74,11 @@ export default observer(function ActivityForm() {
               <MyTextInput placeholder="Title" name="title"  />
               <MyTextArea rows={3} placeholder="Description" name='description' />
               <MySelectInput options={categoryOptions} placeholder="Category" name='category'  />
-              <MyTextInput placeholder="Date"  name='date'  />
+              <MyDateInput placeholderText="Date" name='date' showTimeSelect timeCaption="time" dateFormat='MMMM d, yyyy h:mm aa'  />
               <MyTextInput placeholder="City" name='city' />
               <MyTextInput placeholder="Venue"  name='venue'  />
               <div className="form-button flex justify-end gap-3">
-              <Button component={Link} to='/activities'  className="!bg-gray-500 !text-white !border-none" size="small">Cancel</Button>
+              <Button component={Link} to='/activities' className="!bg-gray-500 !text-white !border-none" size="small">Cancel</Button>
               <LoadingButton loading={loading} type="submit" variant="contained" className="!bg-green-600" size="small">
               Submit
               </LoadingButton>

@@ -4,9 +4,10 @@ import App from './App.tsx'
 import './index.css'
 import 'semantic-ui-css/semantic.min.css'
 import 'react-toastify/ReactToastify.min.css'
-import 'react-calendar/dist/Calendar.css'
 import { StoreContext, store } from './stores/store.ts'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import 'react-calendar/dist/Calendar.css';
+
 
 export const router = createBrowserRouter([
    // match everything with "*"
