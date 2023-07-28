@@ -1,33 +1,45 @@
 import { Container } from "@mui/material"
 import { Link } from "react-router-dom";
+import { useStore } from "../../../stores/store";
+import { Dropdown } from "semantic-ui-react";
+import { observer } from "mobx-react-lite";
 
-const Header = () => {
-
+export default observer(function  Navbar() {
+  const {userStore: {user,logout}} = useStore()
   return (
-    <div className="header-index py-1">
+    <div className="header-index py-2"> 
       <Container>
-        <div className="header-wrapper flex items-center">
-          <Link to='/' className="item-index text-white flex items-center">
-            <img src="../../../../public/assets/logo.png" height={40} width={40} alt="Logo" style={{marginRight: '10px'}} />
+        <div className="header-wrapper flex gap-3 items-center">
+          <Link to='/' className="item-index text-white flex gap-2 items-center">
+           <div className="image">
+           <img src="../../../../public/assets/logo.png"  width={170} height={100} alt="Logo" style={{marginRight: '10px'}} />
+           </div>
             Reactivities
           </Link>
-          <div className="main-index ml-10">
+          <div className="main-index ml-10 flex items-center block w-full">
           <Link to='/errors' className="text-white font-bold mr-4">
               Errors
             </Link>
             <Link to='/activities' className="text-white font-bold mr-4">
               Activities
             </Link>
-            <Link to='/create-activity'>
-            <button  className="bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-4 rounded">
+            <Link to='/create-activity' className="w-100 block">
+            <button  className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded">
               Create Activity
             </button>
             </Link>
+          </div>
+          <div className="w-full justify-end items-center flex gap-2">
+              <img width={33} height={33} src={user?.image || '/assets/user.png'} className="rounded-full" alt="User Avatar" />
+                <Dropdown pointing='top left' text={user?.displayName} >
+                  <Dropdown.Menu>
+                      <Dropdown.Item as={Link} to={`/profile/${user?.username}`} text='My Profile' icon='user' />
+                      <Dropdown.Item onClick={logout} text='logout' icon='power' />
+                  </Dropdown.Menu>
+                </Dropdown>
           </div>
         </div>
       </Container>
     </div>
   )
-}
-
-export default Header
+})
