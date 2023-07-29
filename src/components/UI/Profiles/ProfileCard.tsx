@@ -10,7 +10,7 @@ interface Props {
 const ProfileCard = ({profile} : Props) => {
   return (
     <Link>
-        <Card >
+        <Card style={{width: '220px'}} >
         <CardMedia
             sx={{ height: 140 }}
             image={profile.image || '/assets/user.png'}

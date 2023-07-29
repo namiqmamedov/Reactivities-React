@@ -21,7 +21,7 @@ const ActivityListItemAttendee = ({attendees} : Props) => {
                   </List.Item>
               }
           >
-            <Popup.Content>
+            <Popup.Content style={{width: '220px'}}>
               <ProfileCard profile={attendee} />
             </Popup.Content>
           </Popup>

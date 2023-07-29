@@ -6,6 +6,7 @@ import ActivityDetails from '../components/UI/ActivityDetails'
 import Error from '../errors/Error'
 import NotFound from '../errors/NotFound'
 import LoginForm from '../components/UI/LoginForm/LoginForm'
+import ProfilePage from '../components/UI/Profiles/ProfilePage'
 
 
 const Routers = () => {
@@ -17,6 +18,7 @@ const Routers = () => {
         <Route path='/activities/:id' element={<ActivityDetails/>} />
         <Route path='/create-activity' element={<ActivityForm key='create'/>} />
         <Route path='/manage/:id' element={<ActivityForm key='manage'/> }/>
+        <Route path='/profiles/:username' element={<ProfilePage/> }/>
         <Route path='/login' element={<LoginForm /> }/>
         <Route path='errors' element={<Error/> }/>
         <Route path='not-found' element={<NotFound/> }/>
