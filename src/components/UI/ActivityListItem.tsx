@@ -14,11 +14,14 @@ interface Props {
 const ActivityListItem = ({activity} : Props) => {
 
   return (
-    <div key={activity.id} className="item-wrapper mb-5  bg-white" >
-            <div className="item-body border border-slate-200"> 
+    <div key={activity.id} className="item-wrapper mb-5 bg-white" >
+            <div className="item-body relative border border-slate-200"> 
+            {activity.isCancelled && 
+            <Label attached="top" color="red" content='Cancelled' style={{textAlign: 'center'}}/>
+            }
             <div className="card-header flex gap-3 p-3">
             <div className="image">
-                <img className="rounded-full" src='/assets/user.png' width={65} height={65} alt="Profile" />
+                <img style={{marginBottom: 3}} className="rounded-full" src='/assets/user.png' width={65} height={65} alt="Profile" />
             </div>
             <div className="body">
             <h2 className="font-bold text-[18px]">{activity.title}</h2>
