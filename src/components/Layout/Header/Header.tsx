@@ -16,7 +16,7 @@ export default observer(function  Navbar() {
            </div>
             Reactivities
           </Link>
-          <div className="main-index ml-10 flex items-center block w-full">
+          <div className="main-index ml-10 flex items-center w-full">
           <Link to='/errors' className="text-white font-bold mr-4">
               Errors
             </Link>
