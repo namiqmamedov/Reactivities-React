@@ -31,7 +31,7 @@ export default observer(function ActivityDetails() {
                 <ActivityDetailedChat />
             </Grid>
             <Grid item xs={6}>
-              <ActivityDetailedSidebar/>
+              <ActivityDetailedSidebar activity={activity} />
             </Grid>
           </Grid>
       </Container>

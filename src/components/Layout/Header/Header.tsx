@@ -31,9 +31,9 @@ export default observer(function  Navbar() {
           </div>
           <div className="w-full justify-end items-center flex gap-2">
               <img width={33} height={33} src={user?.image || '/assets/user.png'} className="rounded-full" alt="User Avatar" />
-                <Dropdown pointing='top left' text={user?.displayName} >
+                <Dropdown pointing='top left'  className="!text-white"  text={user?.displayName} >
                   <Dropdown.Menu>
-                      <Dropdown.Item as={Link} to={`/profile/${user?.username}`} text='My Profile' icon='user' />
+                      <Dropdown.Item as={Link} to={`/profile/${user?.username}`}text='My Profile' icon='user' />
                       <Dropdown.Item onClick={logout} text='logout' icon='power' />
                   </Dropdown.Menu>
                 </Dropdown>

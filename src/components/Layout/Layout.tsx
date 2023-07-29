@@ -7,6 +7,7 @@ import Home from "../../pages/Home"
 import { ToastContainer } from "react-toastify"
 import { useStore } from "../../stores/store"
 import Loading from "../../common/Loading"
+import ModalContainer from "../../common/modals/ModalContainer"
 
 const Layout = () => {
   const location = useLocation();
@@ -24,6 +25,7 @@ const Layout = () => {
 
   return (
   <Fragment>
+    <ModalContainer/>
     <ToastContainer position="bottom-right" hideProgressBar theme="colored" />
      {location.pathname === '/' ? <Home/> : (
         <>

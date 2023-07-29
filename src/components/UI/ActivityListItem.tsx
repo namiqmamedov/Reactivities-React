@@ -4,6 +4,8 @@ import { Activity } from "../../models/activity"
 import {BsFillBalloonFill} from 'react-icons/bs'
 import {BiSolidTimeFive} from 'react-icons/bi'
 import { format } from "date-fns"
+import ActivityListItemAttendee from "./ActivityListItemAttendee"
+import { Label } from "semantic-ui-react"
 
 interface Props { 
     activity: Activity
@@ -20,7 +22,21 @@ const ActivityListItem = ({activity} : Props) => {
             </div>
             <div className="body">
             <h2 className="font-bold text-[18px]">{activity.title}</h2>
-            <span w-full>Hosted by Bob</span>
+            <span w-full>Hosted by {activity.host?.displayName}</span>
+            {activity.isHost && (
+                <span className="block mt-5">
+                    <Label basic color="orange">
+                        You are hosting this activity
+                    </Label>
+                </span>
+            )}
+            {activity.isGoing && !activity.isHost && (
+                <span className="block mt-5">
+                    <Label basic color="green">
+                        You are going to this activity
+                    </Label>
+                </span>
+            )}
             </div>
         </div>
             <div className="center flex gap-2 border border-slate-200 border-y-1 p-2">
@@ -34,7 +50,7 @@ const ActivityListItem = ({activity} : Props) => {
             </h2>
         </div>
         <div className="bg-gray-100 p-2.5">
-            <span>Attendees go here</span>
+            <ActivityListItemAttendee attendees={activity.attendees!} />
         </div>
 
     {/* <div className="bottom flex">
@@ -49,8 +65,8 @@ const ActivityListItem = ({activity} : Props) => {
             <Button component={Link} style={{textTransform: 'none'}} to={`/activities/${activity.id}`} className=" !bg-cyan-500"  variant='contained'>View</Button>
         </div>
             </div>
+            </div>
     </div>
-</div>
   )
 }
 
