@@ -3,7 +3,7 @@ import { ChatComment } from "../models/comment";
 import { makeAutoObservable, runInAction } from "mobx";
 import { store } from "./store";
 
-export default class CommnetStore {
+export default class CommentStore {
     comments: ChatComment[] = [];
     hubConnection: HubConnection | null = null;
 
@@ -25,11 +25,19 @@ export default class CommnetStore {
             
             this.hubConnection.on('LoadComments',(comments:ChatComment[]) => 
             {
-                runInAction(() => this.comments = comments);
+                runInAction(() => {
+                    comments.forEach(comment => {
+                        comment.createdAt = new Date(comment.createdAt + 'Z');
+                    })
+                    this.comments = comments
+                });
             })
 
             this.hubConnection.on('ReceiveComment',(comment:ChatComment) => {
-                runInAction(() => this.comments.push(comment))
+                runInAction(() => {
+                    comment.createdAt = new Date(comment.createdAt);
+                    this.comments.unshift(comment)
+                });
             })
         }
     }
@@ -41,5 +49,14 @@ export default class CommnetStore {
     clearComments = () => {
         this.comments = [];
         this.stopHubConnection();
+    }
+
+    addComment = async (values: any) => {
+        values.activityId = store.activityStore.selectedActivity?.id;
+        try {
+            await this.hubConnection?.invoke('SendComment', values);   
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
