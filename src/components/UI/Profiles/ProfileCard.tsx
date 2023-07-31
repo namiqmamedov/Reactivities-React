@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { Profile } from "../../../models/profile";
 import { CardMedia, Typography, Card, CardContent, Link } from "@mui/material";
+import FollowButton from "./FollowButton";
 
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
 
 const ProfileCard = ({profile} : Props) => {
   return (
-    <Link>
+    <Link top={`/profiles/${profile.username}`}>
         <Card style={{width: '220px'}} >
         <CardMedia
             sx={{ height: 140 }}
@@ -27,6 +28,7 @@ const ProfileCard = ({profile} : Props) => {
                 {profile.followersCount} followers
             </Typography>
         </CardContent>
+        <FollowButton profile={profile} />
         </Card>
     </Link>
   )
