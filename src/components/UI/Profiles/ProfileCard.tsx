@@ -24,7 +24,7 @@ const ProfileCard = ({profile} : Props) => {
             Bio is here
             </Typography>
             <Typography variant="body2" color="text.secondary">
-                20 followers
+                {profile.followersCount} followers
             </Typography>
         </CardContent>
         </Card>
