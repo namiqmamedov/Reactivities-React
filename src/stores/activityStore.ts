@@ -175,4 +175,14 @@ export default class ActivityStore {
             runInAction(() => this.loading = false);
         }
     }
+
+    setImage = (image: string) => {
+        const user = store.userStore.user;
+
+        try {
+            if(user) user.image = image;
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }

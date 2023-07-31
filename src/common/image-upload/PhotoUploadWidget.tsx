@@ -1,4 +1,4 @@
-import { Button, Grid, Header, Image } from "semantic-ui-react"
+import { Button, Grid, Header } from "semantic-ui-react"
 import PhotoWidgetDropzone from "./PhotoWidgetDropzone"
 import { useEffect, useState } from "react";
 import PhotoWidgetCropper from "./PhotoWidgetCropper";
@@ -33,19 +33,19 @@ const PhotoUploadWidget = ({loading, uploadPhoto} : Props) => {
         </Grid.Column>
         <Grid.Column width={1} />
         <Grid.Column width={4}>
-            <Header color="teal" content='Step 1 - Resize Image' />
+            <Header color="teal" content='Step 2 - Resize Image' />
             {files && files.length > 0 && (
              <PhotoWidgetCropper setCropper={setCropper} imagePreview={files[0].preview} />
             )}
         </Grid.Column>
         <Grid.Column width={1} />
         <Grid.Column width={4}>
-            <Header color="teal" content='Step 1 - Preview & Upload' />
+            <Header color="teal" content='Step 3 - Preview & Upload' />
             {files && files.length > 0 && 
               <>
               <div className="img-preview" style={{minHeight: 200,overflow: 'hidden'}}/>
                 <Button.Group widths={2}>
-                  <Button  loading={loading} onClick={onCrop} positive icon='check'  />
+                  <Button loading={loading} onClick={onCrop} positive icon='check'  />
                   <Button disabled={loading} onClick={() => setFiles([])} icon='close' />
                 </Button.Group>
               </>}
