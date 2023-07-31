@@ -149,8 +149,6 @@ export default class ProfileStore {
         } catch (error) {
             console.log(error);
             runInAction(() => this.loadingFollowings = false);
-            
         }
     }
-
 }
