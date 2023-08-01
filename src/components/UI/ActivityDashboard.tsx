@@ -3,11 +3,11 @@ import ActivityList from './ActivityList';
 import { useStore } from '../../stores/store';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
-import Loading from '../../common/Loading';
 import ActivityFilters from './ActivityFilters';
 import { PagingParams } from '../../models/pagination';
 import { Loader } from 'semantic-ui-react';
 import InfiniteScroll from 'react-infinite-scroller';
+import ActivityListItemPlaceholder from './ActivityListItemPlaceholder';
 
 export default observer(function ActivityDashboard() {
     const {activityStore} = useStore();
@@ -24,21 +24,27 @@ export default observer(function ActivityDashboard() {
       if (activityRegistry.size <= 1) loadActivities();
     }, [activityRegistry.size, loadActivities])
   
-    if (activityStore.loadingInitial && !loadingNext) return <Loading/>
 
     return (
         <div className="activity-main mt-10">
         <Container>
          <Grid container spacing={2}>
             <Grid item xs={7}>
-              <InfiniteScroll
-                pageStart={0}
-                loadMore={handleGetNext}
-                hasMore={!loadingNext && !!pagination && pagination.currentPage < pagination.totalPages}
-                initialLoad={false}
-              >
-                  <ActivityList/>
-              </InfiniteScroll>
+              {activityStore.loadingInitial && !loadingNext ? (
+                <>
+                  <ActivityListItemPlaceholder/>
+                  <ActivityListItemPlaceholder/>
+                </>
+              ): ( 
+                  <InfiniteScroll
+                  pageStart={0}
+                  loadMore={handleGetNext}
+                  hasMore={!loadingNext && !!pagination && pagination.currentPage < pagination.totalPages}
+                  initialLoad={false}
+                >
+                    <ActivityList/>
+                </InfiniteScroll>
+              )}
             </Grid>
             <Grid item xs={5}>
               <ActivityFilters/>
