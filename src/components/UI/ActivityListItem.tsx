@@ -15,18 +15,18 @@ const ActivityListItem = ({activity} : Props) => {
 
   return (
     <div key={activity.id} className="item-wrapper mb-5 bg-white" >
-            <div className="item-body relative border border-slate-200"> 
+        <div className="item-body relative border border-slate-200"> 
             {activity.isCancelled && 
                 <Label attached="top" color="red" content='Cancelled' style={{textAlign: 'center'}}/>
             }
-            <div className="card-header flex gap-3 p-3">
+        <div className="card-header flex gap-3 p-3">
             <div className="image">
                 <img style={{marginBottom: 3}} className="rounded-full" 
                 src={activity.host?.image || '/assets/user.png'} width={65} height={65} alt="Profile" />
             </div>
             <div className="body">
             <h2 className="font-bold text-[18px]">{activity.title}</h2>
-            <span w-full>Hosted by 
+            <span>Hosted by 
                 <Link className="ml-2" to={`/profiles/${activity.hostUsername}`}>
                 {activity.host?.displayName}
                 </Link>
@@ -47,7 +47,7 @@ const ActivityListItem = ({activity} : Props) => {
             )}
             </div>
         </div>
-            <div className="center flex gap-2 border border-slate-200 border-y-1 p-2">
+        <div className="center flex gap-2 border border-slate-200 border-y-1 p-2">
             <h2 className="flex items-center mb-0 text-[16px]">
                 <BiSolidTimeFive/>
                 {format(activity.date!, 'dd MMM yyyy h:mm aa')}
@@ -73,7 +73,7 @@ const ActivityListItem = ({activity} : Props) => {
             <Button component={Link} style={{textTransform: 'none'}} to={`/activities/${activity.id}`} className=" !bg-cyan-500"  variant='contained'>View</Button>
         </div>
             </div>
-            </div>
+        </div>
     </div>
   )
 }

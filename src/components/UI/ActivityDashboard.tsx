@@ -2,11 +2,11 @@ import { Container, Grid } from '@mui/material'
 import ActivityList from './ActivityList';
 import { useStore } from '../../stores/store';
 import { observer } from 'mobx-react-lite';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import ActivityFilters from './ActivityFilters';
 import { PagingParams } from '../../models/pagination';
-import { Loader } from 'semantic-ui-react';
-import InfiniteScroll from 'react-infinite-scroller';
+import { Button } from 'semantic-ui-react';
+// import InfiniteScroll from 'react-infinite-scroller';
 import ActivityListItemPlaceholder from './ActivityListItemPlaceholder';
 
 export default observer(function ActivityDashboard() {
@@ -36,22 +36,31 @@ export default observer(function ActivityDashboard() {
                   <ActivityListItemPlaceholder/>
                 </>
               ): ( 
-                  <InfiniteScroll
-                  pageStart={0}
-                  loadMore={handleGetNext}
-                  hasMore={!loadingNext && !!pagination && pagination.currentPage < pagination.totalPages}
-                  initialLoad={false}
-                >
+              //   <InfiniteScroll
+              //   pageStart={0}
+              //   loadMore={handleGetNext}
+              //   hasMore={!loadingNext && !!pagination && pagination.currentPage < pagination.totalPages}
+              //   initialLoad={false}
+              // >
+                  <Fragment>
                     <ActivityList/>
-                </InfiniteScroll>
+                    <Button 
+                    floated='right'
+                    content='More...'
+                    positive
+                    onClick={handleGetNext}
+                    loading={loadingNext}
+                    disabled={pagination?.totalPages === pagination?.currentPage} />
+                  </Fragment>
+              // </InfiniteScroll>
               )}
             </Grid>
             <Grid item xs={5}>
               <ActivityFilters/>
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
                 <Loader active={loadingNext} />
-            </Grid>
+            </Grid> */}
         </Grid>
        </Container>
     </div>

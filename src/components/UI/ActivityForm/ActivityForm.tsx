@@ -56,13 +56,13 @@ export default observer(function ActivityForm() {
   if(loadingInitial) return <Loading/>
   
   return (
-    <Container>
-      <Header content='Activity Details' sub color="teal" />
+    <Container className="py-4 px-4 mt-10">
+      <Header content='Activity Details' sub color="teal" className="!mb-4" />
       <Formik validationSchema={validationSchema} initialValues={activity} onSubmit={values => {
         return handleFormSubmit(values);
       }} enableReinitialize >
         {({handleSubmit,isValid,isSubmitting,dirty}) => (
-       <form onSubmit={handleSubmit} autoComplete="off" className="bg-white py-4 px-4 mt-10 ui form">
+       <form onSubmit={handleSubmit} autoComplete="off" className="bg-white ui form">
               <MyTextInput placeholder="Title" name="title"  />
               <MyTextArea rows={3} placeholder="Description" name='description' />
               <MySelectInput options={categoryOptions} placeholder="Category" name='category'  />

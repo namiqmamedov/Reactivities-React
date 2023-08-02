@@ -10,7 +10,7 @@ interface Props {
 
 const ProfileCard = ({profile} : Props) => {
   return (
-    <Link top={`/profiles/${profile.username}`}>
+    <Link className="!mr-1 !mb-3 !ml-3" top={`/profiles/${profile.username}`}>
         <Card style={{width: '220px'}} >
         <CardMedia
             sx={{ height: 140 }}

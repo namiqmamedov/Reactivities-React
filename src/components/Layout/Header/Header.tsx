@@ -12,14 +12,14 @@ export default observer(function  Navbar() {
         <div className="header-wrapper flex gap-3 items-center">
           <Link to='/' className="item-index text-white flex gap-2 items-center">
            <div className="image">
-           <img src="../../../../public/assets/logo.png"  width={170} height={100} alt="Logo" style={{marginRight: '10px'}} />
+           <img src='/assets/logo.png' width={170} height={100} alt="Logo" style={{marginRight: '10px'}} />
            </div>
             Reactivities
           </Link>
           <div className="main-index ml-10 flex items-center w-full">
-          <Link to='/errors' className="text-white font-bold mr-4">
+          {/* <Link to='/errors' className="text-white font-bold mr-4">
               Errors
-            </Link>
+            </Link> */}
             <Link to='/activities' className="text-white font-bold mr-4">
               Activities
             </Link>

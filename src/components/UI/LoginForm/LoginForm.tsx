@@ -11,7 +11,7 @@ import { Container } from '@mui/material'
         <Container className=' mt-12'>
                 <Formik 
                 initialValues={{email: '',password: '', error: null}}
-                onSubmit={(values, {setErrors}) => userStore.login(values).catch(error =>
+                onSubmit={(values, {setErrors}) => userStore.login(values).catch(_error =>
                 setErrors({error: 'Invalid email or password'}))}
                 >
                     {({handleSubmit, isSubmitting,errors}) => (

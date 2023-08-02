@@ -17,7 +17,7 @@ const ProfileContent = ({profile} : Props) => {
     const panes = [
         {menuItem: 'About', render: () => <Tab.Pane>About Content</Tab.Pane>},
         {menuItem: 'Photos', render: () => <ProfilePhotos profile={profile} />},
-        {menuItem: 'Events', render: () =>    <ProfileActivities/>},
+        {menuItem: 'Events', render: () =>  <ProfileActivities/>},
         {menuItem: 'Followers', render: () => <ProfileFollowings/>},
         {menuItem: 'Following', render: () => <ProfileFollowings/>},
     ];

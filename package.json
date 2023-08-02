@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@greatsumini/react-facebook-login": "^3.3.3",
     "@microsoft/signalr": "^7.0.9",
     "@mui/lab": "^5.0.0-alpha.137",
     "@mui/material": "^5.14.1",
@@ -20,6 +21,7 @@
     "axios": "^1.4.0",
     "date-fns": "^2.16.1",
     "formik": "^2.4.2",
+    "fs": "^0.0.1-security",
     "mobx": "^6.10.0",
     "mobx-react-lite": "^4.0.3",
     "react": "^18.2.0",
@@ -38,6 +40,7 @@
     "yup": "^1.2.0"
   },
   "devDependencies": {
+    "@types/node": "^20.4.5",
     "@types/react": "^18.2.15",
     "@types/react-datepicker": "^4.15.0",
     "@types/react-dom": "^18.2.7",
@@ -45,6 +48,7 @@
     "@types/yup": "^0.32.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-basic-ssl": "^1.0.1",
     "@vitejs/plugin-react": "^4.0.3",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.45.0",
@@ -53,6 +57,7 @@
     "postcss": "^8.4.27",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vite-plugin-mkcert": "^1.16.0"
   }
 }

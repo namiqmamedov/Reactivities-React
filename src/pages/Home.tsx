@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
-import { Button, Container, Header, Segment, Image } from "semantic-ui-react";
+import { Button, Container, Header, Segment, Image, Divider } from "semantic-ui-react";
 import { useStore } from '../stores/store';
 import LoginForm from '../components/UI/LoginForm/LoginForm';
 import RegisterForm from '../components/UI/RegisterForm/RegisterForm';
+import FacebookLogin from '@greatsumini/react-facebook-login';
 
 export default function HomePage() {
     const {userStore,modalStore} = useStore();
@@ -28,8 +29,26 @@ export default function HomePage() {
                         <Button onClick={() => modalStore.openModal(<RegisterForm/>)} as={Link} size='huge' inverted>
                             Register!
                         </Button>
+                        <Divider horizontal inverted>
+                            Or
+                        </Divider>
+                        <Button 
+                             as={FacebookLogin}
+                             appId='150890864658576'
+                             size='huge' 
+                             inverted 
+                             color='facebook'
+                             content='Login with Facebook'
+                             loading={userStore.fbLoading}
+                             onSuccess={(response: any) => {
+                                userStore.facebookLogin(response.accessToken);
+                                console.log('Login success',response);
+                             }}
+                             onFail={(response: any) => {
+                                console.log('Login failed',response);
+                             }}
+                        />
                     </>
-
                 )}
             </Container>
         </Segment>

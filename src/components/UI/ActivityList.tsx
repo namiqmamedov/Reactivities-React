@@ -10,7 +10,7 @@ export default observer(function ActivityList() {
 
 
   return (
-    <>
+    <Fragment>
         {groupedActivities.map(([group, activities]) => (
             <Fragment key={group}>
                 <div className= 'text-cyan-500 font-bol mb-3'>
@@ -27,7 +27,7 @@ export default observer(function ActivityList() {
                 </div>
             </Fragment>
         ))}
-    </>
+    </Fragment>
 
   )
 })
